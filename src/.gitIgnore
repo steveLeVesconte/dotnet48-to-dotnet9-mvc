@@ -1,0 +1,122 @@
+# Visual Studio / ASP.NET MVC5 .gitignore
+# See https://github.com/github/gitignore/blob/main/VisualStudio.gitignore and
+# https://github.com/github/gitignore/blob/main/ASP.NET.gitignore for reference
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Bb]uildOutputs/
+
+## Visual Studio temporary files, build logs, and database files
+*.log
+*.tlog
+*.tps
+*.cachefile
+*.dbmdl
+*.bak
+*.backup
+*.mdf
+*.ldf
+
+## Visual Studio Code workspace
+.vscode/
+
+## Visual Studio 2015+ cache/options directory
+.vs/
+.vs/*
+
+## NuGet
+*.nupkg
+packages/
+# The packages folder can be restored via NuGet; do not store it in source control
+# If using PackageReference, packages folder isn't used.
+
+# NuGet v3's project.json files
+project.lock.json
+project.fragment.lock.json
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## JetBrains Rider
+.idea/
+
+## Web/Node tooling
+node_modules/
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
+.pnpm-store/
+
+# Bower components (if used)
+bower_components/
+
+## Publish / deployment
+.publish/
+*.Publish.xml
+*.azurePubxml
+*.PublishProfile
+_PublishedWebsites/
+obj/Release/Package/PackageTmp/
+obj/Debug/Package/PackageTmp/
+*.PublishSettings
+
+## IIS / Web
+App_Data/aspnetdb.mdf
+App_Data/aspnet-*.mdf
+
+## Visual Studio cache files
+*.cache
+*.ilk
+*.meta
+*.obj
+
+## Thumbcache / image db
+Thumbs.db
+ehthumbs.db
+
+## Windows image file caches
+[Dd]esktop.ini
+
+## Others
+*.class
+*.jar
+*.dll
+*.exe
+
+# Rider/IDE specific
+.idea/
+*.sln.iml
+
+# Entity Framework migrations (if you prefer to ignore generated designer files)
+# EF Migrations snapshots and designer files are usually checked in; remove if you want to keep them.
+# Migrations/ModelSnapshot.cs
+
+# Keep web.config in source control (required), ignore user-specific transforms
+Web.Debug.config
+Web.Release.config
+
+# Optional: if you use Visual Studio's Secret Manager or user secrets, ignore secrets file
+secrets.json
+
+# Optional: if using Docker
+docker-compose*
+
+# Roslyn compiler tools - not needed in source control, restored by NuGet
+bin/roslyn/
+
