@@ -1,0 +1,55 @@
+﻿
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+<ul id="navlist">
+    <li class="first">
+        <a href="/" id="current">Home</a>
+    </li>
+    <li>
+        <a href="/Store/">Store</a>
+    </li>
+    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+    <li>
+        <a href="@Url.Content("~/StoreManager/")">
+            Admin
+        </a>
+    </li>
+    <li>
+        <span class="nav-username">
+            Hello, @User.Identity.GetUserName()!
+        </span>
+
+    </li>
+    <li>
+        @Html.ActionLink("Change Password", "ChangePassword", "Account")
+    </li>
+    <li>
+        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+    </li>
+</ul>
+    }
+}
+else
+{
+<ul id="navlist">
+    <li class="first">
+        <a href="/" id="current">Home</a>
+    </li>
+    <li>
+        <a href="/Store/">Store</a>
+    </li>
+    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+    <li>
+        <a href="@Url.Content("~/StoreManager/")">
+            Admin
+        </a>
+    </li>
+    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+</ul>
+}
