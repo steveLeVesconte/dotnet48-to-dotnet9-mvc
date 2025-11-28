@@ -1,10 +1,8 @@
 # Smoke Test Procedures - Phase 1 Baseline
 
-**Last Updated**: November 23, 2025
+**Last Updated**: November 28, 2025
 
-**Purpose**: Document current seed project behavior as baseline for regression detection
-
-This is a **baseline measurement**, not a quality assessment:
+**This is a baseline measurement, not a quality assessment.**
 
 - We record what the application does today (including any quirks or limitations)
 - We use this baseline to detect regressions during migration phases
@@ -23,43 +21,12 @@ This is a **baseline measurement**, not a quality assessment:
 
 ------
 
-- [ ] ## Prerequisites
+## Prerequisites
 
-  - [ ] **Fresh database state verified** (see Database State below)
-  - [ ] Application running locally on IIS Express
-  - [ ] Browser DevTools (F12) available for console monitoring
-  - [ ] Test accounts document accessible
-
-  ### Database State
-
-  This smoke test assumes **fresh seed data** from the application's database initializer.
-
-  **Before starting smoke test**, verify database state:
-
-  **Option 1: Drop and Reseed (Recommended for Phase 1 baseline)**
-  ```sql
-  -- Connect to (LocalDB)\MSSQLLocalDB
-  DROP DATABASE IF EXISTS MvcMusicStore;
-  DROP DATABASE IF EXISTS MvcMusicStoreUsers;
-  ```
-  Then start the application—databases auto-recreate with seed data.
-
-  **Option 2: Verify Without Dropping**
-  Only use this if you're certain databases are clean (no test data pollution):
-  ```sql
-  -- Verify expected counts
-  SELECT COUNT(*) FROM Albums;   -- Should be 462
-  SELECT COUNT(*) FROM Artists;  -- Should be 303
-  SELECT COUNT(*) FROM Genres;   -- Should be 10
-  ```
-
-  **Why this matters**: Smoke test results must reflect seed project behavior, not accumulated test data. Stale cart items, test orders, or modified albums invalidate the baseline.
-
-  **When to drop databases**:
-  - ✅ Before Phase 1 baseline documentation (this smoke test)
-  - ✅ Before Phase 2 Azure migration (pre-migration snapshot)
-  - ✅ Before Phase 4 .NET 9 validation (clean comparison)
-  - ✅ Any time test results seem inconsistent
+- [ ] **Fresh database state verified** (see Appendix A: Database Reset Procedure)
+- [ ] Application running locally on IIS Express
+- [ ] Browser DevTools (F12) available for console monitoring
+- [ ] Test accounts document accessible
 
 ------
 
@@ -122,8 +89,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 1. Home Page
 
-**URL**: `/` or `/Home/Index`
- **Authentication Required**: No
+**URL**: `/` or `/Home/Index` **Authentication Required**: No
 
 ### Expected Elements
 
@@ -140,8 +106,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 2. Store Index
 
-**URL**: `/Store` or `/Store/Index`
- **Authentication Required**: No
+**URL**: `/Store` or `/Store/Index` **Authentication Required**: No
 
 ### Expected Elements
 
@@ -158,9 +123,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 3. Store Browse
 
-**URL**: `/Store/Browse?genre=Rock`
- **Authentication Required**: No
- **Test Parameter**: Use "Rock" genre consistently
+**URL**: `/Store/Browse?genre=Rock` **Authentication Required**: No **Test Parameter**: Use "Rock" genre consistently
 
 ### Expected Elements
 
@@ -178,9 +141,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 4. Store Details
 
-**URL**: `/Store/Details/1`
- **Authentication Required**: No
- **Test Parameter**: Use Album ID 1 consistently
+**URL**: `/Store/Details/1` **Authentication Required**: No **Test Parameter**: Use Album ID 1 consistently
 
 ### Expected Elements
 
@@ -199,9 +160,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 5. Shopping Cart
 
-**URL**: `/ShoppingCart`
- **Authentication Required**: No
- **Test Setup**: Add 1-2 albums to cart before testing this page
+**URL**: `/ShoppingCart` **Authentication Required**: No **Test Setup**: Add 1-2 albums to cart before testing this page
 
 ### Expected Elements
 
@@ -224,9 +183,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 6. Checkout
 
-**URL**: `/Checkout/AddressAndPayment`
- **Authentication Required**: YES
- **Test Setup**:
+**URL**: `/Checkout/AddressAndPayment` **Authentication Required**: YES **Test Setup**:
 
 1. Login with admin account (see `/docs/test-accounts.md`)
 2. Ensure cart has at least 1 item
@@ -261,9 +218,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 7. Checkout Complete
 
-**URL**: `/Checkout/Complete` (after successful checkout)
- **Authentication Required**: YES
- **Test Setup**:
+**URL**: `/Checkout/Complete` (after successful checkout) **Authentication Required**: YES **Test Setup**:
 
 1. Login with visitor test account (see `/docs/test-accounts.md`)
 2. Ensure cart has at least 1 item
@@ -283,9 +238,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 8. Admin (StoreManager)
 
-**URL**: `/StoreManager`
- **Authentication Required**: YES (Admin role required)
- **Test Setup**: Login with admin test account (see `/docs/test-accounts.md`)
+**URL**: `/StoreManager` **Authentication Required**: YES (Admin role required) **Test Setup**: Login with admin test account (see `/docs/test-accounts.md`)
 
 ### Expected Elements
 
@@ -307,9 +260,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 9. Create a New Album
 
-**URL**: `/StoreManager/Create`
- **Authentication Required**: YES (Admin role required)
- **Test Setup**:
+**URL**: `/StoreManager/Create` **Authentication Required**: YES (Admin role required) **Test Setup**:
 
 1. Starting on Admin Page (so you must be logged in as an admin)
 2. Click on "Create New" Link (above the Album List)
@@ -337,15 +288,13 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
   - AC/DC from ArtistId dropdown
   - Title: "ZZZ"
   - Price: 99.99
-  - Album Art URL: "/Content/Images/placeholder.gif"
-     The Store Manager page will be displayed and the new album will be the last item in the list.
+  - Album Art URL: "/Content/Images/placeholder.gif" The Store Manager page will be displayed and the new album will be the last item in the list.
 
 ------
 
 ## 10. Register Page
 
-**URL**: `/Account/Register`
- **Authentication Required**: No (test while logged out)
+**URL**: `/Account/Register` **Authentication Required**: No (test while logged out)
 
 ### Expected Elements
 
@@ -377,8 +326,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 11. Login Page
 
-**URL**: `/Account/Login`
- **Authentication Required**: No (test while logged out)
+**URL**: `/Account/Login` **Authentication Required**: No (test while logged out)
 
 ### Expected Elements
 
@@ -407,8 +355,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 12. Store Manager Page (when not admin role)
 
-**URL**: `/StoreManager`
- **Authentication Required**: No (test while logged out)
+**URL**: `/StoreManager` **Authentication Required**: No (test while logged out)
 
 ### Expected Behaviour
 
@@ -775,5 +722,38 @@ If you complete this smoke test and your summary shows "8 pages documented with 
 
 ------
 
-**Document Version**: 2.0 (Baseline measurement approach)
- **Last Updated**: November 23, 2025
+## Appendix A: Database Reset Procedure
+
+**Prerequisites**:
+
+- Application is stopped (close browser, stop IIS Express debugging in Visual Studio)
+- SQL Server Management Studio (SSMS) installed
+
+**Steps**:
+
+1. Open SSMS and connect to: `(LocalDB)\MSSQLLocalDB`
+2. In Object Explorer, expand **Databases**
+3. Right-click `MvcMusicStore` → **Delete**
+   - Check "Close existing connections" if available
+   - Click OK
+4. Right-click `MvcMusicStoreUsers` → **Delete**
+   - Check "Close existing connections" if available
+   - Click OK
+5. Databases will be gone from Object Explorer
+6. Start the application—databases auto-recreate with seed data
+
+**Note**: After dropping the databases, the first time you start the MvcMusicStore application the app will pause to recreate the MvcMusicStore database on startup and again the first time you use login or register as it will need to create the MvcMusicStoreUsers database.
+
+**Note**: We use SSMS GUI instead of T-SQL because LocalDB's connection handling makes `DROP DATABASE` scripts unreliable in development environments (Visual Studio keeps background connections open). The GUI handles this automatically.
+
+**Why this matters**: Smoke test results must reflect seed project behavior in a known valid state. Reseeding the database ensures that the state is known and valid.
+
+**When to drop databases**:
+
+- ✅ Before Phase 1 baseline documentation (this smoke test)
+- ✅ Before Phase 2 Azure migration (pre-migration snapshot)
+- ✅ Before Phase 4 .NET 9 validation (clean comparison)
+- ✅ Any time test results seem inconsistent
+
+------
+

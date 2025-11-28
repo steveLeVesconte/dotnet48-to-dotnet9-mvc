@@ -1,6 +1,6 @@
 # Test Accounts - MVC Music Store
 
-**Last Updated**: November 20, 2025
+**Last Updated**: November 28, 2025
 
 **Purpose**: Document test account credentials for smoke testing and development. These accounts must be created once before running the smoke test procedures.
 
@@ -28,7 +28,11 @@ This hybrid approach reflects the seed project's design: admin users are infrast
 
 ## Admin Account
 
-**Email**: `admin@musicstore.com` **Password**: `Admin123!` (meets policy: 1 uppercase, 1 lowercase, 1 number, 1 special char) **Role**: Administrator
+**Email**: `admin@musicstore.com`  
+**Password**: `Admin123!`  
+**Role**: Administrator
+
+(Password meets policy: 1 uppercase, 1 lowercase, 1 number, 1 special char)
 
 **Permissions**:
 
@@ -54,13 +58,15 @@ The admin account is created automatically during database initialization.
 3. Login with `admin@musicstore.com` / `Admin123!`
 4. Navigate to `/StoreManager` (should display album list, not access denied)
 
-**If login fails**, see Troubleshooting section below.
-
 ------
 
 ## Visitor Account
 
-**Email**: `visitor@test.com` **Password**: `Visitor@123456` (meets policy: 1 uppercase, 1 lowercase, 1 number, 1 special char) **Role**: Registered User (no admin privileges)
+**Email**: `visitor@test.com`  
+**Password**: `Visitor@123456`  
+**Role**: Registered User (no admin privileges)
+
+(Password meets policy: 1 uppercase, 1 lowercase, 1 number, 1 special char)
 
 **Permissions**:
 
@@ -133,8 +139,6 @@ After setup, verify both accounts work correctly:
    - Verify checkout form displays
 
 
-
 ------
 
-**Document Status**: Living document - update as account needs change
  **Last Verified**: [Add date after you verify setup works]
