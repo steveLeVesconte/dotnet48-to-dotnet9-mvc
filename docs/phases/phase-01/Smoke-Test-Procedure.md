@@ -25,7 +25,7 @@
 
 - [ ] **Fresh database state verified** (see Appendix A: Database Reset Procedure)
 - [ ] Application running locally on IIS Express
-- [ ] Browser DevTools (F12) available for console monitoring
+- [ ] **Chrome browser** with DevTools (F12) available for console monitoring
 - [ ] Test accounts document accessible
 
 ------
@@ -55,7 +55,7 @@ Test all 12 pages in the following order:
 
 1. **Navigate** to the page URL
 2. **Visual Check**: Record what displays - all elements, any quirks, missing items
-3. **Console Check**: Open F12 → Console tab, capture any errors or warnings present
+3. **Console Check**: Open F12 → Check both Console tab and Issues tab, capture any errors, warnings, or issues present
 4. **Document Behavior**: Record observations in the Results section (see template below)
 5. **Screenshot**: Optional - take if it helps document unusual behavior
 
@@ -65,7 +65,7 @@ Use these labels when recording results:
 
 - **✅ Documented**: Page behavior captured completely
   - Record what you see, including any console warnings or visual quirks
-  - Example: "Page loads, shows 3 albums, jQuery deprecation warning in console"
+  - Example: "Page loads, shows 5 albums, jQuery deprecation warning in console"
 - **⚠️ Needs Investigation**: Behavior seems wrong but unclear if it's seed project quirk or real problem
   - Example: "Album art missing on details page - is this expected?"
   - Example: "Form validation message shows 'undefined' - seed project bug or environmental?"
@@ -94,7 +94,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 ### Expected Elements
 
 - [ ] Site logo/header displays
-- [ ] Featured albums section visible with minimum 3 albums shown
+- [ ] Featured albums section visible with minimum 5 albums shown
 - [ ] Genre navigation menu in left sidebar
 - [ ] All album images load (broken image icons count as "documented behavior")
 - [ ] Footer
@@ -112,7 +112,6 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 - [ ] Page title "Browse Genres" or similar heading
 - [ ] Complete list of all music genres
-- [ ] Album count displayed per genre
 - [ ] All genre links are clickable (cursor changes, not disabled)
 - [ ] Consistent styling and layout with site theme
 - [ ] **Console state documented** (capture any errors or warnings present)
@@ -128,11 +127,10 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 ### Expected Elements
 
 - [ ] Genre name "Rock" displayed as page heading
-- [ ] List of albums in Rock genre (minimum 1 album)
+- [ ] List of albums in Rock genre 
 - [ ] Album titles and artists visible for each album
 - [ ] Album artwork/thumbnails display (broken images count as "documented behavior")
-- [ ] Price displayed for each album in correct format ($X.XX)
-- [ ] Album title links are clickable
+- [ ] Album title and image links are clickable
 - [ ] **Console state documented** (capture any errors or warnings present)
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
@@ -146,12 +144,11 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 ### Expected Elements
 
 - [ ] Album title displayed prominently as heading
-- [ ] Album artwork - There is no large image - just a thumbnail
+- [ ] Album artwork - There is no large image - just a shared generic placeholder thumbnail
 - [ ] Artist name visible
 - [ ] Genre visible
-- [ ] Price formatted correctly as currency ($X.XX)
+- [ ] Price formatted correctly as currency (X.XX)
 - [ ] "Add to cart" button visible and enabled (not grayed out)
-- [ ] Album description or details (if present in data)
 - [ ] **Console state documented** (capture any errors or warnings present)
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
