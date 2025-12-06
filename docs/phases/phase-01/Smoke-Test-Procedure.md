@@ -1,6 +1,6 @@
 # Smoke Test Procedures - Phase 1 Baseline
 
-**Last Updated**: November 28, 2025
+**Last Updated**: December 06, 2025
 
 **This is a baseline measurement, not a quality assessment.**
 
@@ -14,10 +14,23 @@
 
 ------
 
-## ⚠️ Security Notes
+## Test Accounts
 
-- Test credentials are documented in `/docs/test-accounts.md` (not committed to git)
-- Do not commit completed test results containing credentials or production data
+This is a **portfolio demonstration project** with publicly available source code.
+These credentials are for local testing only and are documented here for convenience.
+
+**Admin Account** (auto-created by seed data):
+- Email: `admin@musicstore.com`
+- Password: `Admin123!`
+
+**Visitor Account** (create manually via `/Account/Register`):
+- Email: `visitor@test.com`  
+- Password: `Visitor@123456`
+
+**Note**: In production environments, test credentials would be in Azure Key Vault 
+or environment variables, never committed to source control. This project demonstrates
+proper cloud secrets management in Phase 2 (Azure deployment) and Phase 5 
+(Managed Identity integration).
 
 ------
 
@@ -26,7 +39,6 @@
 - [ ] **Fresh database state verified** (see Appendix A: Database Reset Procedure)
 - [ ] Application running locally on IIS Express
 - [ ] **Chrome browser** with DevTools (F12) available for console monitoring
-- [ ] Test accounts document accessible
 
 ------
 
@@ -144,7 +156,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 ### Expected Elements
 
 - [ ] Album title displayed prominently as heading
-- [ ] Album artwork - There is no large image - just a shared generic placeholder thumbnail
+- [ ] Album artwork displays (note: seed project uses thumbnail-only, not full-size image)
 - [ ] Artist name visible
 - [ ] Genre visible
 - [ ] Price formatted correctly as currency (X.XX)
@@ -171,7 +183,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
 
-### Behaviour
+### Behavior
 
 - [ ] "Checkout" click when NOT logged in: Login page will be displayed
 - [ ] "Checkout" click when logged in: Checkout page will be displayed
@@ -182,7 +194,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 **URL**: `/Checkout/AddressAndPayment` **Authentication Required**: YES **Test Setup**:
 
-1. Login with admin account (see `/docs/test-accounts.md`)
+1. Login with admin account
 2. Ensure cart has at least 1 item
 3. Navigate to checkout
 
@@ -206,7 +218,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
 
-### Behaviour
+### Behavior
 
 - [ ] "Submit Order" click when fields are empty causes "required" indicators to be displayed on all fields. Ex: "First Name is required"
 - [ ] "Submit Order" click when fields have been entered with valid data causes navigation to Checkout Complete page
@@ -217,7 +229,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 **URL**: `/Checkout/Complete` (after successful checkout) **Authentication Required**: YES **Test Setup**:
 
-1. Login with visitor test account (see `/docs/test-accounts.md`)
+1. Login with visitor test account 
 2. Ensure cart has at least 1 item
 3. Navigate to checkout
 4. Complete checkout form and click "Submit Order"
@@ -235,7 +247,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 ## 8. Admin (StoreManager)
 
-**URL**: `/StoreManager` **Authentication Required**: YES (Admin role required) **Test Setup**: Login with admin test account (see `/docs/test-accounts.md`)
+**URL**: `/StoreManager` **Authentication Required**: YES (Admin role required) **Test Setup**: Login with admin test account 
 
 ### Expected Elements
 
@@ -277,7 +289,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
 
-### Behaviour
+### Behavior
 
 - [ ] "Create" click when Title and Price fields are empty causes "required" indicators to be displayed on all fields. Ex: "An Album Title is required"
 - [ ] Enter the following data and then click "Create":
@@ -304,7 +316,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
 
-### Behaviour
+### Behavior
 
 - [ ] "Register" click when all fields are empty causes "required" indicators to be displayed on all fields. Ex: "The Email field is required"
 - [ ] "Register" click after a single character has been entered in the Password field causes the following messages to be displayed:
@@ -338,7 +350,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 - [ ] **Layout observations documented** (note any quirks or visual issues)
 - [ ] **Current behavior captured** (what does this page actually do today?)
 
-### Behaviour
+### Behavior
 
 - [ ] "Login" click when all fields are empty causes "required" indicators to be displayed on all fields. Ex: "The Email field is required"
 - [ ] "Log In" click after a single character has been entered in the Email field causes the following message to be displayed:
@@ -354,7 +366,7 @@ Only mark **Blocked** if you literally cannot see the page or complete the user 
 
 **URL**: `/StoreManager` **Authentication Required**: No (test while logged out)
 
-### Expected Behaviour
+### Expected Behavior
 
 - [ ] Login Page will be displayed
 
@@ -531,6 +543,42 @@ Behaviors that MUST be preserved during migration:
 **Why track these**: Phase 4 tests must verify these behaviors persist post-migration.
 
 ------
+
+### Documentation Scope: What to Include vs Skip
+
+**Document these (they affect functionality or could cause regressions)**:
+
+✅ Console errors/warnings (all of them - part of baseline)
+✅ Missing functionality (no pagination, no password reset, etc.)
+✅ Non-standard implementations that work (anchor styled as button)
+✅ Layout quirks with technical causes (footer width, clickable areas)
+✅ Validation behavior (client-side vs server-side patterns)
+✅ Authentication/authorization behavior
+✅ Data display patterns (placeholder images, missing fields)
+
+**Skip these (CSS polish and minor visual inconsistencies)**:
+
+❌ Hover color inconsistencies (unless it affects accessibility)
+❌ Font size variations
+❌ Minor spacing/alignment issues
+❌ Missing currency symbols (unless it causes confusion)
+❌ Cosmetic styling differences between similar elements
+
+**Decision principle**: Document if it could break differently during migration or if 
+a hiring manager would notice the quirk. Skip if it's pure CSS polish.
+
+**Why this matters**: Over-documenting trivial UI details looks like nitpicking to 
+hiring managers. Under-documenting functional quirks risks missing regressions. 
+This balance reflects professional judgment.
+
+**Example - Document**:
+- "Add to cart button is `<a>` inside `<p class="button">` - hover target is text only, 
+  not entire gray box. Non-standard but functional."
+
+**Example - Skip**:
+- "Featured album links don't change color on hover like menu items do"
+
+---
 
 #### 📝 Known Limitation (Document and Preserve)
 
@@ -714,7 +762,6 @@ If you complete this smoke test and your summary shows "8 pages documented with 
 
 ## See Also
 
-- **Test Accounts**: `/docs/test-accounts.md` (credentials for visitor and admin roles)
 - **Phase 1 Roadmap**: `/docs/roadmap.md` (context for this testing phase)
 
 ------
