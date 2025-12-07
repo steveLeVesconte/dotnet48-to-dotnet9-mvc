@@ -9,9 +9,9 @@ Enterprise migration portfolio demonstrating:
 
 **Current Status**: Phase 1 In Progress - Smoke Tests Complete ✅
 
-## The Seed Application
+## The Application
 
-![Home Page](docs\images\homepage-screenshot.png) *Phase 1: .NET Framework 4.8 baseline - [View smoke test results](docs/baselines/phase1-smoke-test-results-2025-11-28.md)*
+![Home Page](docs/images/homepage-screenshot.png) *Phase 1: .NET Framework 4.8 baseline - [View smoke test results](docs/baselines/phase1-smoke-test-results-2025-11-28.md)*
 
 
 
@@ -100,7 +100,6 @@ By separating these risks, each phase has clear validation criteria and rollback
 **Key Deliverables**:
 
 - [Smoke Test Procedure](docs/phases/phase-01/Smoke-Test-Procedure.md) - Repeatable test protocol
-- [Test Accounts Guide](docs/phases/phase-01/test-accounts.md) - Test user setup
 - [Phase 1 Baseline Results](docs/baselines/phase1-smoke-test-results-2025-11-28.md) - Complete baseline
 
 ## Key Decisions & Discoveries
@@ -204,7 +203,6 @@ Key architectural decisions documented as ADRs:
 - [Migration Roadmap](docs/roadmap.md) - Complete 7-phase strategy with timelines
 - [Smoke Test Procedure](docs/phases/phase-01/Smoke-Test-Procedure.md) - Repeatable testing protocol
 - [Phase 1 Baseline Results](docs/baselines/phase1-smoke-test-results-2025-11-28.md) - Behavior documentation
-- [Test Accounts Guide](docs/phases/phase-01/test-accounts.md) - Test user setup
 
 ## Repository Structure
 

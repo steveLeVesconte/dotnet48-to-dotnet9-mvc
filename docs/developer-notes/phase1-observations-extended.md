@@ -13,7 +13,7 @@ that don't belong in formal baseline documentation but are worth tracking. After
 
 **Reproduction**:
 1. Add item to cart
-2. Remove item via AJAX (item fades out)
+2. Remove item via AJAX 
 3. Click Checkout
 4. Browser back button
 5. Removed item still shows in DOM (stale cached page)
@@ -39,8 +39,6 @@ that don't belong in formal baseline documentation but are worth tracking. After
 
 ---
 
----
-
 ## Album Art - Placeholder Strategy
 
 **Observations**: 
@@ -63,13 +61,11 @@ that don't belong in formal baseline documentation but are worth tracking. After
 
 Shopping Cart Page
 
-Checkout button is enabled even after all items have been removed.  
+- Checkout button is enabled even after all items have been removed.  
 
 Address and Payment Page
 
-It is possible to complete the checkout process with zero items 
-
-
+- It is possible to complete the checkout process with zero items.
 
 Home Page:
 
@@ -77,7 +73,7 @@ Home Page:
   -  the color of the text changes
   -  the arrow mouse pointer becomes a pointing finger mouse pointer
 
-​	But there is an exception or omission - the featured album name links do not change color on hover
+​	But there is an exception or omission - the featured album name links do not change color on hover.
 
 -  On the one hand this could be considered a defensible ux choice in that the font is smaller for the featured album names and so you could say "then are not the same as menu items", but I think this is a ux flaw.  I think if the demonstrated standard is hover has a predicable color shift, then that should be true of all links. 
 
@@ -91,8 +87,8 @@ Store Details Page
 
  ```
  <p class="button">
-          <a length="0" href="/ShoppingCart/AddToCart/1">Add to cart</a>
-      </p>
+     <a length="0" href="/ShoppingCart/AddToCart/1">Add to cart</a>
+ </p>
  ```
 
 - the price is presented without a "$". 
