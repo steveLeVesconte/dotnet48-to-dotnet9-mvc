@@ -1,7 +1,7 @@
 # Dependency Inventory - MvcMusicStore
 
 **Document Version**: 1.0  
-**Date**: November 15, 2025  
+**Date**: November 23, 2025  
 **Project**: MvcMusicStore .NET Framework to .NET 9 Migration  
 **Current Framework**: .NET Framework 4.8  
 **Target Framework**: .NET 9
@@ -169,12 +169,12 @@ From `Web.config`:
 ### Database Contexts
 
 1. **MusicStoreEntities** - Main application data
-    
+   
     - Albums, Artists, Genres
     - Shopping Cart items
     - Orders and OrderDetails
 2. **ApplicationDbContext** - ASP.NET Identity
-    
+   
     - Users, Roles, Claims
     - Separate database for security isolation
 
@@ -435,35 +435,6 @@ RequireUppercase = false
 
 - [ValidateAntiForgeryToken] on POST actions
 
-**Migration Considerations**:
-
-- Phase 4: Strengthen password requirements
-- Phase 5: Add external OAuth providers
-- Phase 5: Implement Azure Key Vault for secrets
-- Consider adding rate limiting, HTTPS redirection
-
----
-
-## Testing Infrastructure
-
-**Current State**: No test project included in provided files
-
-**Planned (Phase 1)**:
-
-- xUnit test framework
-- Integration tests for critical workflows:
-    - Anonymous browsing
-    - Shopping cart operations
-    - User registration and login
-    - Checkout process
-    - Admin CRUD operations
-
-**Migration Impact**: Tests must be updated for ASP.NET Core:
-
-- TestServer for integration tests
-- Update mocking strategies
-- Async test patterns
-
 ---
 
 ## Missing or Unused Features
@@ -486,134 +457,5 @@ From reference documents:
 
 ---
 
-## Risk Assessment by Phase
-
-### Phase 1 (Foundation) - Low Risk
-
-- xUnit adoption - straightforward
-- Application Insights - additive only
-- No breaking changes to codebase
-
-### Phase 2 (Azure Migration) - Medium Risk
-
-- Database migration critical path
-- Connection string management
-- IaC learning curve
-- Secrets management setup required
-
-### Phase 3 (Azure Validation) - Low Risk
-
-- Validation only
-- No code changes
-
-### Phase 4 (Platform Migration) - **CRITICAL HIGH RISK**
-
-- All System.Web.* dependencies must be replaced
-- OWIN → ASP.NET Core middleware complete rewrite
-- EF6 → EF Core breaking changes
-- Identity 2.x → ASP.NET Core Identity schema differences
-- Session state configuration changes
-- Routing system differences
-- [ChildActionOnly] → ViewComponents refactor
-
-### Phase 5 (Modern Auth) - Medium Risk
-
-- External OAuth adds complexity
-- Azure Key Vault integration
-- Secrets rotation strategy
-
-### Phases 6-10 - Medium Risk
-
-- Additive features primarily
-- Performance optimization without breaking changes
-
----
-
-## Critical Success Factors
-
-### Must-Have Before Phase 4
-
-1. **Comprehensive test coverage** - Safety net for breaking changes
-2. **Performance baselines** - Prove no regression
-3. **Database migration scripts** - Preserve data integrity
-4. **Session behavior documentation** - Understand state management implications
-
-### Must-Verify During Phase 4
-
-1. **Identity schema compatibility** - Users can still log in
-2. **Shopping cart persistence** - Anonymous carts survive
-3. **Role-based authorization** - Admin access still works
-4. **AJAX functionality** - Cart operations still work
-5. **Database queries** - EF Core LINQ differences don't break logic
-
-### Must-Not-Do
-
-1. **Don't combine Phase 4 with other major changes** - Platform migration alone is complex enough
-2. **Don't skip performance comparison** - Regression is unacceptable
-3. **Don't assume test compatibility** - Rewrite tests as needed for ASP.NET Core patterns
-
----
-
-## Dependency Change Tracking
-
-This table will be updated as packages are replaced during migration:
-
-|Original Package|Version|Replacement Package|Version|Phase|Status|
-|---|---|---|---|---|---|
-|EntityFramework|6.5.1|Microsoft.EntityFrameworkCore|TBD|4|Not Started|
-|Microsoft.AspNet.Mvc|5.2.9|Microsoft.AspNetCore.Mvc|TBD|4|Not Started|
-|Microsoft.AspNet.Identity.*|2.2.4|Microsoft.AspNetCore.Identity|TBD|4|Not Started|
-|_(Add others as replaced)_||||||
-
----
-
-## Quick Reference: Migration Cheat Sheet
-
-**Most Impactful Namespace Changes**:
-
-```
-System.Web.Mvc                    → Microsoft.AspNetCore.Mvc
-System.Data.Entity                → Microsoft.EntityFrameworkCore
-Microsoft.AspNet.Identity         → Microsoft.AspNetCore.Identity
-System.Web.Optimization           → (use build tools or TagHelpers)
-```
-
-**Most Impactful API Changes**:
-
-```
-[ChildActionOnly]                 → ViewComponent
-Global.asax.cs                    → Program.cs / Startup.cs
-Web.config                        → appsettings.json
-DbContext.Database.SetInitializer → EF Core Migrations
-HttpContext.GetOwinContext()      → HttpContext directly
-```
-
-**Most Common Gotchas**:
-
-1. Session must be explicitly configured in ASP.NET Core
-2. EF Core does not support DropCreateDatabase* initializers
-3. ASP.NET Core Identity has different schema (migration required)
-4. Routing uses endpoint routing pattern
-5. Authentication middleware order matters in pipeline
-
----
-
-## Document Maintenance
-
-**Frozen After**: Phase 1 completion (baseline captured)
-
-**Update Only For**:
-
-- Discovered dependencies not in original inventory
-- Corrections to version numbers or package names
-- Additional migration notes based on actual experience
-
-**Do Not Update For**:
-
-- Replaced packages (use Dependency Change Tracking table)
-- Post-migration versions (separate document in Phase 4+)
-
----
-
-**Last Updated**: November 15, 2025  
-**Document Status**: ✅ Ready for Phase 1 Baseline
+- **Last Updated**: November 23, 2025  
+  **Document Status**: ✅ Ready for Phase 1 Baseline
