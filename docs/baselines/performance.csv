@@ -1,0 +1,16 @@
+page,run,environment,timestamp,load_time_ms,dom_ready_ms,requests,transfer_kb
+/,1,local,2025-12-09 22:57:34,76,51,13,680
+/,2,local,2025-12-09 22:58:22,81,52,13,680
+/,3,local,2025-12-09 23:04:59,89,62,13,681
+/,4,local,2025-12-09 23:06:41,80,52,13,681
+/,5,local,2025-12-09 23:58:16,81,50,13,681
+/Store/Details/1,1,local,2025-12-09 22:39:02,125,94,12,426
+/Store/Details/1,2,local,2025-12-09 22:40:57,82,61,12,425
+/Store/Details/1,3,local,2025-12-09 22:42:27,85,57,12,426
+/Store/Details/1,4,local,2025-12-09 22:43:05,80,53,12,425
+/Store/Details/1,5,local,2025-12-09 22:44:08,89,60,12,426
+/Checkout/AddressAndPayment,1,local,2025-12-09 23:15:57,90,58,13,450
+/Checkout/AddressAndPayment,2,local,2025-12-09 23:16:37,85,56,13,450
+/Checkout/AddressAndPayment,3,local,2025-12-09 23:17:46,89,63,13,450
+/Checkout/AddressAndPayment,4,local,2025-12-09 23:18:30,91,58,13,450
+/Checkout/AddressAndPayment,5,local,2025-12-09 23:23:53,96,63,13,450
