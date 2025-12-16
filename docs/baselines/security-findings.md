@@ -49,8 +49,7 @@ All findings reflect the **state of the repository as committed** and serve as a
 Dependabot identified the following outdated dependencies at baseline.
  No upgrade PRs were merged as part of Repo 1.
 
-![Dependabot security overview showing 9 update recommendations]
- (/docs/images/dependabot-summary.png)
+![Dependabot security overview showing 9 update recommendations](/docs/images/dependabot-summary.png)
 
 *Figure 1 — GitHub Dependabot security overview at baseline capture.*
 
@@ -79,8 +78,7 @@ These findings establish that the repository contains **known outdated dependenc
 
 ## CodeQL Baseline
 
-![CodeQL security alerts overview]
- (/docs/images/codeql-summary.png)
+![CodeQL security alerts overview](/docs/images/codeql-summary.png)
 
 *Figure 2 — GitHub CodeQL alert summary captured at baseline.*
 
