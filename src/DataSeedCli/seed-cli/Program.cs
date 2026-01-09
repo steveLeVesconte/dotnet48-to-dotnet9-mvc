@@ -8,6 +8,7 @@ namespace seed_cli
         // Exit codes per slice contract
         private const int ExitSuccess = 0;
         private const int ExitMissingRequiredInputs = 1;
+        private const int ExitPreconditionsFailed = 2;
 
         static int Main(string[] args)
         {
@@ -63,7 +64,119 @@ namespace seed_cli
                 step3.Ok();
             }
 
-            // End of slice: do not implement beyond First_Coding_Chunk.md
+            // Step 6 — Identity DB connectivity check
+            using (logger.Step(dbTarget: "Identity", action: "Connectivity check (open + SELECT 1)", out var step6))
+            {
+                try
+                {
+                    DbGuards.ProbeConnectivityReadOnly(cli.IdentityConnection);
+                    logger.Info("Identity DB reachable OK");
+                    step6.Ok();
+                }
+                catch (Exception ex)
+                {
+                    var safeMsg = Secrets.SanitizeExceptionMessage(ex.Message, cli);
+                    logger.Info($"ERROR stepName=\"Identity DB connectivity\" exceptionType={ex.GetType().FullName} message=\"{safeMsg}\"");
+                    step6.Fail();
+                    return ExitPreconditionsFailed;
+                }
+            }
+
+            // Step 7 — MusicStore DB connectivity check
+            using (logger.Step(dbTarget: "MusicStore", action: "Connectivity check (open + SELECT 1)", out var step7))
+            {
+                try
+                {
+                    DbGuards.ProbeConnectivityReadOnly(cli.MusicStoreConnection);
+                    logger.Info("MusicStore DB reachable OK");
+                    step7.Ok();
+                }
+                catch (Exception ex)
+                {
+                    var safeMsg = Secrets.SanitizeExceptionMessage(ex.Message, cli);
+                    logger.Info($"ERROR stepName=\"MusicStore DB connectivity\" exceptionType={ex.GetType().FullName} message=\"{safeMsg}\"");
+                    step7.Fail();
+                    return ExitPreconditionsFailed;
+                }
+            }
+
+            // Step 8 — Identity DB required schema check (Identity tables exist)
+            using (logger.Step(dbTarget: "Identity", action: "Schema check (required Identity tables exist)", out var step8))
+            {
+                try
+                {
+                    var existing = DbGuards.GetBaseTableNames(cli.IdentityConnection);
+
+                    var requiredIdentityTables = new[]
+                    {
+                        "AspNetUsers",
+                        "AspNetRoles",
+                        "AspNetUserClaims",
+                        "AspNetUserLogins",
+                        "AspNetUserRoles"
+                    };
+
+                    var missingIdentity = DbGuards.GetMissingTables(existing, requiredIdentityTables);
+
+                    if (missingIdentity.Length > 0)
+                    {
+                        logger.Info($"Identity DB missing required tables: count={missingIdentity.Length} list=[{string.Join(", ", missingIdentity)}]");
+                        step8.Fail();
+                        return ExitPreconditionsFailed;
+                    }
+
+                    step8.Ok();
+                }
+                catch (Exception ex)
+                {
+                    var safeMsg = Secrets.SanitizeExceptionMessage(ex.Message, cli);
+                    logger.Info($"ERROR stepName=\"Identity DB schema check\" exceptionType={ex.GetType().FullName} message=\"{safeMsg}\"");
+                    step8.Fail();
+                    return ExitPreconditionsFailed;
+                }
+            }
+
+            // Step 9 — MusicStore DB required schema check (core tables exist)
+            using (logger.Step(dbTarget: "MusicStore", action: "Schema check (required core tables exist)", out var step9))
+            {
+                try
+                {
+                    var existing = DbGuards.GetBaseTableNames(cli.MusicStoreConnection);
+
+                    var requiredMusicStoreTables = new[]
+                    {
+                        "Albums",
+                        "Artists",
+                        "Genres",
+                        "Orders",
+                        "OrderDetails",
+                        "Carts"
+                    };
+
+                    var missingMusicStore = DbGuards.GetMissingTables(existing, requiredMusicStoreTables);
+
+                    if (missingMusicStore.Length > 0)
+                    {
+                        logger.Info($"MusicStore DB missing required tables: count={missingMusicStore.Length} list=[{string.Join(", ", missingMusicStore)}]");
+                        step9.Fail();
+                        return ExitPreconditionsFailed;
+                    }
+
+                    step9.Ok();
+                }
+                catch (Exception ex)
+                {
+                    var safeMsg = Secrets.SanitizeExceptionMessage(ex.Message, cli);
+                    logger.Info($"ERROR stepName=\"MusicStore DB schema check\" exceptionType={ex.GetType().FullName} message=\"{safeMsg}\"");
+                    step9.Fail();
+                    return ExitPreconditionsFailed;
+                }
+            }
+
+            // Suggested chunk-level success log (optional)
+            logger.Info("STEP Preconditions connectivity/schema OK (identityOk=true musicstoreOk=true)");
+
+            // End of this slice: no writes
             return ExitSuccess;
         }
     }

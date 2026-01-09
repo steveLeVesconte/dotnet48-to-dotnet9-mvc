@@ -47,6 +47,7 @@
     <Compile Include="Cli\CliLogger.cs" />
     <Compile Include="Cli\CliParser.cs" />
     <Compile Include="Cli\CliValidator.cs" />
+    <Compile Include="Cli\DbGuards.cs" />
     <Compile Include="Cli\Secrets.cs" />
     <Compile Include="Cli\Usage.cs" />
     <Compile Include="Program.cs" />
