@@ -22,13 +22,6 @@ namespace seed_cli.Cli
                 @"Cannot open database\s+(['""])(?<db>.*?)\1\s+requested by",
                 RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
-    //    private static readonly Regex SqlServerNameRegex =
-    //new Regex(
-    //    @"Cannot open database "".*"" requested by",
-    //    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-
-
-
         // Central list of secret-bearing values to sanitize from exception messages.
         // Note: We never log raw secrets, and we do not attempt to parse credentials.
         public static string SanitizeExceptionMessage(string message, CliArgs args)

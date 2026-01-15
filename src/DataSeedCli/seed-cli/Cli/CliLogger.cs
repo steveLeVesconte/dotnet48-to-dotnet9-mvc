@@ -55,7 +55,17 @@ namespace seed_cli.Cli
                 _ended = true;
 
                 _sw.Stop();
+                if (_result != "OK")
+                {
+                    _logger.Info("");
+                    _logger.Info("****************************************");
+                }
                 _logger.Info($"step={_stepNo} db={_dbTarget} action=\"{_action}\" result={_result} elapsedMs={_sw.ElapsedMilliseconds}");
+                if (_result != "OK")
+                {
+                    _logger.Info("****************************************");
+                }
+
             }
         }
     }
